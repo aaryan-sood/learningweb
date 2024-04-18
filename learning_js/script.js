@@ -455,12 +455,7 @@ function sum(...nums){
     })
 }
 
-function raceResults(gold,silver,...eyeryoneElse)
-{
-    console.log(`Gold medal goes to ${gold}`);
-    console.log(`Silver medal goes to ${silver}`);
-    console.log(`And thanks to everyone else ${eyeryoneElse}`);
-}
+
 
 const scores=[988729,897654,789765,678954,567893];
 const [gold,silver,bronze,...everyoneElse]=scores;
