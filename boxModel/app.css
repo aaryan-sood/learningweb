@@ -1,0 +1,48 @@
+div
+{
+    width: 200px;
+    height: 200px;
+    background-color: #e5989b;
+}
+span
+{
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+body
+{
+    margin: 0;
+}
+h1
+{
+    background-color: pink;
+    width: 200px;
+    padding-left: 100px;
+    padding-top: 50px;
+    margin: 0;
+}
+#one
+{
+    background-color: #e5989b;
+    border: solid black 2px;
+    box-sizing: border-box;
+}
+#two
+{
+    background-color: #b5838d;
+    border: solid #ffcdb2 2px;
+    box-sizing: border-box;
+    padding-right: 50px;
+}
+#three
+{
+    background-color: #6d6875;
+    border: 2px solid black;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+button
+{
+    padding: 10px 20px;
+    padding: 10px 20px 30px 40px;
+}

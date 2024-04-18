@@ -1,0 +1,14 @@
+body
+{
+    background: wheat;
+    font-family: 'Montserrat', sans-serif;
+}
+main
+{
+    width: 60%;
+    margin: 0 auto;
+}
+h1,h2,h3
+{
+    font-family: 'Roboto', sans-serif;
+}
