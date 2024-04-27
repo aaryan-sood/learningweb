@@ -1,15 +1,15 @@
-console.log("Script loaded!");
 
 const form=document.querySelector("#shelterform");
-form.addEventListener('submit',function (Event) {
-    Event.preventDefault();
-    console.log('submitted')
+const input=document.querySelector('#catname');
+const ul=document.querySelector('#cats');
+
+form.addEventListener("submit",function (e) {
+    e.preventDefault();
+    const li=document.createElement('li');
+    li.innerText=input.value;
+    input.value='';
+    ul.append(li);
 })
-// document.addEventListener('DOMContentLoaded', function() {
-//     console.log("DOM fully loaded and parsed");
-//     const form = document.querySelector('#shelterform');
-//     form.addEventListener('submit', function (event) {
-//         event.preventDefault();
-//         console.log('Form submitted');
-//     });
-// });
+
+
+
