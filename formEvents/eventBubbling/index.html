@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Bubbling</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body>
+    <section onclick="alert('hello you clicked a section')">
+      <p onclick="alert('you clicked a paragraph')">
+        Hi i am a paragraph
+        <button onclick="alert('Hello you clicked a button')">Click Me</button>
+      </p>
+    </section>
+    <div id="container">
+        Click to Hide
+        <button id="changeColor">Change Color</button>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
