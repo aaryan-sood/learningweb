@@ -9,39 +9,96 @@ const fakeRequestCallback = (url, success, failure) => {
         }
     }, delay)
 }
-// THE PROMISE VERSION 
-const fakeRequestPromise = (url) => {
-    return new Promise((resolve, reject) => {
-        const delay = Math.floor(Math.random() * (4500)) + 500;
+
+// Making our own new promise
+// new Promise((resolve,reject) => {
+//     resolve();
+//     // Now resolve reject these are two parametres and they are not only parametres but functions we can execute inside this promise detrermine whether this promise will be rejected or resolved
+// })
+
+
+
+const fakerequest=(url) => {
+    return new Promise((resolve,reject) => {
+        const rand=Math.random() 
         setTimeout(() => {
-            if (delay > 4000) {
-                reject('Connection Timeout :(')
-            } else {
-                resolve(`Here is your fake data from ${url}`)
+            if(rand < 0.7)
+            {
+                resolve('Your Fake Data here');
             }
-        }, delay)
+            else
+            {
+                reject('Request Error');
+            }
+        },1000)
     })
 }
 
-fakeRequestPromise('yelp.com/coffee/page1')
+fakerequest('/dogs')
 .then((data) => {
-    console.log('It Worked (page1)')
-    console.log(data)
-    return fakeRequestPromise('yelp.com/coffee/page1')
-})
-.then((data) => {
-    console.log('It worked (page2)')
-    console.log(data)
-    return fakeRequestPromise('yelp.com/coffee/page2')
-})
-.then((data) => {
-    console.log('It worked (page3)')
-    console.log(data)
+    console.log('Done with resolve')
+    console.log('data is : ',data);
 })
 .catch((err) => {
-    console.log('any one of the requests failed')
-    console.log(err)
+    console.log('error !!!',err)
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// THE PROMISE VERSION 
+// const fakeRequestPromise = (url) => {
+//     return new Promise((resolve, reject) => {
+//         const delay = Math.floor(Math.random() * (4500)) + 500;
+//         setTimeout(() => {
+//             if (delay > 4000) {
+//                 reject('Connection Timeout :(')
+//             } else {
+//                 resolve(`Here is your fake data from ${url}`)
+//             }
+//         }, delay)
+//     })
+// }
+
+// Promise Chaining
+// fakeRequestPromise('yelp.com/coffee/page1')
+// .then((data) => {
+//     console.log('It Worked (page1)')
+//     console.log(data)
+//     return fakeRequestPromise('yelp.com/coffee/page1')
+// })
+// .then((data) => {
+//     console.log('It worked (page2)')
+//     console.log(data)
+//     return fakeRequestPromise('yelp.com/coffee/page2')
+// })
+// .then((data) => {
+//     console.log('It worked (page3)')
+//     console.log(data)
+// })
+// .catch((err) => {
+//     console.log('any one of the requests failed')
+//     console.log(err)
+// })
 
 //Promises data request
 // fakeRequestPromise('yelp.com/coffee/page1')
