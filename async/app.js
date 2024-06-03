@@ -57,29 +57,40 @@ const delayedColorChange=(color,delay)=>{
     })
 }
 
+async function rainbow (){
+    await delayedColorChange('red',1000);
+    await delayedColorChange('orange',1000);
+    await delayedColorChange('yellow',1000)
+    await delayedColorChange('green',1000);
+    await delayedColorChange('blue',1000);
+    await delayedColorChange('indigo',1000);
+    await delayedColorChange('violet',1000);    // Now they all return a promise the await keyword just pauses the execution of the async function until the promise is resolved
+}
 
-delayedColorChange('red',1000)
-.then(()=> {
-    return delayedColorChange('orange',1000)
-})
-.then(() => {
-    return delayedColorChange('yellow',1000)
-})
-.then(() => {
-    return delayedColorChange('green',1000)
-})
-.then(() => {
-    return delayedColorChange('blue',1000)
-})
-.then(() => {
-    return delayedColorChange('indigo',1000)
-})
-.then(() => {
-    return delayedColorChange('violet',1000)
-})
-.catch(()=> {
-    console.log('Oh shit Promise rejected')
-})
+rainbow()
+
+// delayedColorChange('red',1000)
+// .then(()=> {
+//     return delayedColorChange('orange',1000)
+// })
+// .then(() => {
+//     return delayedColorChange('yellow',1000)
+// })
+// .then(() => {
+//     return delayedColorChange('green',1000)
+// })
+// .then(() => {
+//     return delayedColorChange('blue',1000)
+// })
+// .then(() => {
+//     return delayedColorChange('indigo',1000)
+// })
+// .then(() => {
+//     return delayedColorChange('violet',1000)
+// })
+// .catch(()=> {
+//     console.log('Oh shit Promise rejected')
+// })
 
 // delayedColorChange('red',1000,() => {
 //     delayedColorChange('orange',1000, ()=> {
@@ -105,4 +116,43 @@ delayedColorChange('red',1000)
 //     })
 // },() => {
 //     // if API is down, or request failed
+// })
+
+// Asynchronous Functions 
+// async function hello(){
+
+// }
+
+// const sing = async() =>{
+//     // return 'Billu Bakra'
+//     throw new Error("Oh shit ! here we go again")
+// }
+
+// sing()
+// .then((data) => {
+//     console.log('Promises resolved with : ',data)
+// })
+// .catch((err) => {
+//     console.log('Oh shit! error',err)
+// })
+
+// const login = async(username,password) => {
+//     if(username && password){
+//         if(password === 'aaryan_sood'){
+//             return 'Welcome Sir'
+//         }
+//         else{
+//             throw "Wrong Password"
+//         }
+//     }
+//     throw "Missing Credentials"
+// }
+// login('aaryan','aaryan_sood')
+// .then((msg) => {
+//     console.log('LOGGED IN')
+//     console.log(msg)
+// })
+// .catch((err) => {
+//     console.log('error')
+//     console.log(err)
 // })
