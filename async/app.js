@@ -65,9 +65,15 @@ async function rainbow (){
     await delayedColorChange('blue',1000);
     await delayedColorChange('indigo',1000);
     await delayedColorChange('violet',1000);    // Now they all return a promise the await keyword just pauses the execution of the async function until the promise is resolved
+    return "All Done !!"
 }
 
-rainbow()
+async function printRainbow(){
+    await rainbow();    //Now since rainbow is a asynchronous function await will wait until the promise is resolved as asynchronous functions return a promise that rainbow will not retrun until  the seven colurs are resolved as it is returned in the end 
+    // console.log(data)
+    console.log('End of raninbow')
+}
+printRainbow();
 
 // delayedColorChange('red',1000)
 // .then(()=> {

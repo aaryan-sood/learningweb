@@ -22,9 +22,9 @@ const fakerequest=(url) => {
     return new Promise((resolve,reject) => {
         const rand=Math.random() 
         setTimeout(() => {
-            if(rand < 0.7)
+            if(rand < 0.3)
             {
-                resolve('Your Fake Data here');
+                resolve('Your Fake Data here',url);
             }
             else
             {
@@ -34,14 +34,25 @@ const fakerequest=(url) => {
     })
 }
 
-fakerequest('/dogs')
-.then((data) => {
-    console.log('Done with resolve')
-    console.log('data is : ',data);
-})
-.catch((err) => {
-    console.log('error !!!',err)
-})
+async function makerequest(){
+    try{
+        let data=await fakerequest('yelp.com/page1');
+        console.log(data);
+    }catch(e){
+        console.log('caught an error')
+        console.log('error is : ',e)
+    }
+    
+}
+makerequest();
+// fakerequest('/dogs')
+// .then((data) => {
+//     console.log('Done with resolve')
+//     console.log('data is : ',data);
+// })
+// .catch((err) => {
+//     console.log('error !!!',err)
+// })
 
 
 
