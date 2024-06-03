@@ -19,50 +19,82 @@
 // },3000);
 // console.log('I print second');
 
-setTimeout(()=> {
-    document.body.style.backgroundColor='red';
-    setTimeout(() => {
-        document.body.style.backgroundColor='orange'
-        setTimeout(() => {
-            document.body.style.backgroundColor='yellow'
-            setTimeout(() => {
-                document.body.style.backgroundColor='green'
-                setTimeout(() => {
-                    document.body.style.backgroundColor='blue'
-                    setTimeout(() => {
-                        document.body.style.backgroundColor='indigo'
-                        setTimeout(() => {
-                            document.body.style.backgroundColor='violet'
-                        },1000)
-                    },1000)
-                },1000)
-            },1000)
-        },1000)
-    },1000)
-},1000)
+// setTimeout(()=> {
+//     document.body.style.backgroundColor='red';
+//     setTimeout(() => {
+//         document.body.style.backgroundColor='orange'
+//         setTimeout(() => {
+//             document.body.style.backgroundColor='yellow'
+//             setTimeout(() => {
+//                 document.body.style.backgroundColor='green'
+//                 setTimeout(() => {
+//                     document.body.style.backgroundColor='blue'
+//                     setTimeout(() => {
+//                         document.body.style.backgroundColor='indigo'
+//                         setTimeout(() => {
+//                             document.body.style.backgroundColor='violet'
+//                         },1000)
+//                     },1000)
+//                 },1000)
+//             },1000)
+//         },1000)
+//     },1000)
+// },1000)
 
-const delayedColorChange=(newColor,delay,doNext) => {
-    setTimeout(() => {
-        document.body.style.backgroundColor=newColor;
-        doNext && doNext();
-    },delay)
+// const delayedColorChange=(newColor,delay,doNext) => {
+//     setTimeout(() => {
+//         document.body.style.backgroundColor=newColor;
+//         doNext && doNext();
+//     },delay)
+// }
+
+const delayedColorChange=(color,delay)=>{
+    return new Promise((resolve, reject) => {
+        setTimeout(()=>{
+            document.body.style.backgroundColor=color
+        },delay)
+    })
 }
 
-delayedColorChange('red',1000,() => {
-    delayedColorChange('orange',1000, ()=> {
-        delayedColorChange('yellow',1000,() => {
-            delayedColorChange('green',1000,() => {
-                delayedColorChange('blue',1000,() => {
-                    delayedColorChange('indigo',1000,()=> {
-                        delayedColorChange('violet',1000,() => {
 
-                        })
-                    })
-                })
-            })
-        })
-    })
+delayedColorChange('red',1000)
+.then(()=> {
+    return delayedColorChange('orange',1000)
 })
+.then(() => {
+    return delayedColorChange('yellow',1000)
+})
+.then(() => {
+    return delayedColorChange('green',1000)
+})
+.then(() => {
+    return delayedColorChange('blue',1000)
+})
+.then(() => {
+    return delayedColorChange('indigo',1000)
+})
+.then(() => {
+    return delayedColorChange('violet',1000)
+})
+.catch(()=> {
+    console.log('Oh shit Promise rejected')
+})
+
+// delayedColorChange('red',1000,() => {
+//     delayedColorChange('orange',1000, ()=> {
+//         delayedColorChange('yellow',1000,() => {
+//             delayedColorChange('green',1000,() => {
+//                 delayedColorChange('blue',1000,() => {
+//                     delayedColorChange('indigo',1000,()=> {
+//                         delayedColorChange('violet',1000,() => {
+
+//                         })
+//                     })
+//                 })
+//             })
+//         })
+//     })
+// })
 
 // searchMoviesAPI('amadeus',() => {
 //     saveToMyDB(movies,() => {
