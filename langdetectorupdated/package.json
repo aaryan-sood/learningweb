@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "name": "langdetectorupdated",
+  "version": "1.0.0",
+  "description": "\"implemented the same language detector but used import\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aaryan sood",
+  "license": "ISC",
+  "dependencies": {
+    "franc": "^6.2.0",
+    "langs": "^2.0.0"
+  }
+}
