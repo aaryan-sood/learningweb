@@ -1,0 +1,14 @@
+{
+  "name": "mongose_intro",
+  "version": "1.0.0",
+  "description": "just a intro to mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aaryan sood",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.4.3"
+  }
+}
