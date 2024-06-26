@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Form</title>
 </head>
+
 <body>
     <h1>Add a Product</h1>
     <form action="/products" method="post">
         <label for="name">Product Name</label>
-        <input type="text" name="name" id="name" placeholder="enter product name">
+        <input type="text" name="name" id="name" placeholder="enter product name" />
         <label for="price">Product Price</label>
-        <input type="number" name="price" id="price" placeholder="enter a price">
+        <input type="number" name="price" id="price" placeholder="enter a price" />
         <label for="category">Select Category</label>
         <select name="category" id="category">
             <option value="fruit">Fruit</option>
@@ -19,6 +21,10 @@
             <option value="diary">Diary</option>
         </select>
         <button type="submit">Submit</button>
+        <div>
+            <a href="/products">Back To Index</a>
+        </div>
     </form>
 </body>
+
 </html>

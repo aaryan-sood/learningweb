@@ -2,10 +2,12 @@ const express=require('express')
 const path=require('path')
 const mongoose=require('mongoose')
 const Product=require('./models/products')
+const methodOverride=require('method-override')
 
 let app=express()
 let port=3000
 app.use(express.urlencoded({extended : true}))
+app.use(methodOverride('_method'))   //express middleware to use method override
 
 mongoose.connect('mongodb://127.0.0.1:27017/farmStand')
 .then(() => console.log('mongoose connection open'))
@@ -18,15 +20,13 @@ app.set('views',path.join(__dirname,'views'))
 app.get('/products',async (req,res) => {
     // now in this get route we will list all our products by resonding and sending a webpage by quering the database
     const products=await Product.find({})   //now since it takes time and returns a thenable object we add .then and .catch or make it a async function and just await it
-    console.log(products)
     res.render('products/index.ejs',{products})
 })
 
 app.post('/products',async(req,res) => {
     const newProduct=new Product(req.body)
     await newProduct.save()
-    console.log(newProduct)
-    res.redirect(`/products/${newProduct._id}`)
+    res.redirect(`/products/ ${newProduct._id}`)
 })
 
 //serve the form
@@ -37,9 +37,22 @@ app.get('/products/new',(req,res) => {
 //view products in detail
 app.get('/products/:id', async (req,res) => {
     let {id}=req.params
-    let product=await Product.findById(id)
-    console.log(product)
+    let product=await Product.findById(id)  
     res.render('products/show.ejs',{product})
+})
+
+// to update put or patch request
+app.put('/products/:id',async(req,res) => {
+    let {id}=req.params
+    let product=await Product.findByIdAndUpdate(id,req.body,{runValidators : true , new : true})
+    res.redirect(`/products/${product._id}`)
+})
+
+//edit individual products
+app.get('/products/:id/edit',async (req,res) => {
+    let {id}=req.params
+    let product=await Product.findById(id)
+    res.render('products/edit.ejs',{product})
 })
 
 app.listen(port,() => {
