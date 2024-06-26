@@ -14,13 +14,13 @@
         <label for="price">Product's Price
             <input type="text" name="price" id="price" value="<%= product.price %>">
         </label>
-        <label for="category">Product's Category
-            <select name="category" id="category">
-                <option value="fruit" <%= product.category[0] === 'fruit' ? 'selected' : '' %> >fruit</option>
-                <option value="vegetable" <%= product.category[0] === 'vegetable' ? 'selected' : '' %> >vegetable</option>
-                <option value="diary" <%= product.category[0] === 'diary' ? 'selected' : '' %> >diary</option>
-            </select>
-        </label>
+        <label for="category">Product's Category</label>
+<select name="category" id="category">
+    <% for (let category of categories) { %>
+        <option value="<%= category %>" <%= product.category[0] === category ? 'selected' : '' %> ><%= category %></option>
+    <% } %>
+</select>
+
         <button type="submit">Submit</button>
     </form>
     <a href="/products/<%= product._id %>">Back to Show</a>

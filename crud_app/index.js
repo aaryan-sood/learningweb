@@ -9,6 +9,8 @@ let port=3000
 app.use(express.urlencoded({extended : true}))
 app.use(methodOverride('_method'))   //express middleware to use method override
 
+const categories=['fruit','vegetable','diary']
+
 mongoose.connect('mongodb://127.0.0.1:27017/farmStand')
 .then(() => console.log('mongoose connection open'))
 .catch(() => console.log('mongoose connection error'))
@@ -26,12 +28,12 @@ app.get('/products',async (req,res) => {
 app.post('/products',async(req,res) => {
     const newProduct=new Product(req.body)
     await newProduct.save()
-    res.redirect(`/products/ ${newProduct._id}`)
+    res.redirect(`/products/${newProduct._id}`)
 })
 
 //serve the form
 app.get('/products/new',(req,res) => {
-    res.render('products/new.ejs')
+    res.render('products/new.ejs',{categories})
 })
 
 //view products in detail
@@ -52,9 +54,14 @@ app.put('/products/:id',async(req,res) => {
 app.get('/products/:id/edit',async (req,res) => {
     let {id}=req.params
     let product=await Product.findById(id)
-    res.render('products/edit.ejs',{product})
+    res.render('products/edit.ejs',{product,categories })
 })
 
+app.delete('/products/:id',async(req,res) => {
+    let {id}=req.params
+    await Product.findByIdAndDelete(id)
+    res.redirect('/products')
+})
 app.listen(port,() => {
     console.log(`listening on port ${port}`)
 })
