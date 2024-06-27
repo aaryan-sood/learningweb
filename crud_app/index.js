@@ -21,8 +21,19 @@ app.set('views',path.join(__dirname,'views'))
 //view the products
 app.get('/products',async (req,res) => {
     // now in this get route we will list all our products by resonding and sending a webpage by quering the database
-    const products=await Product.find({})   //now since it takes time and returns a thenable object we add .then and .catch or make it a async function and just await it
-    res.render('products/index.ejs',{products})
+       //now since it takes time and returns a thenable object we add .then and .catch or make it a async function and just await it
+    
+    let {category} = req.query
+    if(category){
+        const products=await Product.find({category : category})
+        res.render('products/index.ejs',{products,category})
+    }
+    else
+    {
+        const products=await Product.find({})
+        res.render('products/index.ejs',{products,category : 'All'})
+    }
+    console.log(category)
 })
 
 app.post('/products',async(req,res) => {
