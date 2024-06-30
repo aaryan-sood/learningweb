@@ -25,10 +25,21 @@ app.use('/dogs',(req,res,next) => {
     next()
 })
 
+const verifypassword=((req,res,next) => {
+    let {password}= req.query
+    if(password === 'chickennuggets'){
+        next()
+    }
+    res.send('sorry you need a password to enter here!!')
+})
 
 app.get('/',(req,res) => {
     console.log(`${req.requestTime}`)
     res.send('Home Page')
+})
+
+app.get('/secret',verifypassword,(req,res,next) => {
+    res.send(`My Secret is : sometimes i wear headphones i public so i need not to talk to people`)
 })
 
 app.get('/dogs',(req,res) => {
