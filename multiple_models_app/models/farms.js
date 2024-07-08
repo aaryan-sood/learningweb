@@ -17,3 +17,6 @@ const farmSchema=new mongoose.Schema({
         ref : 'Product'
     }]              //Here in this farm we have an array of id's  as a farm can have many products
 }) 
+
+const Farm=mongoose.model('Farm',farmSchema)
+module.exports=Farm;

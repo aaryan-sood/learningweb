@@ -3,6 +3,7 @@ const path=require('path')
 const mongoose=require('mongoose')
 const Product=require('./models/products')
 const methodOverride=require('method-override')
+const Farm=require('./models/farms.js')
 
 let app=express()
 let port=3000
@@ -11,13 +12,32 @@ app.use(methodOverride('_method'))   //express middleware to use method override
 
 const categories=['fruit','vegetable','diary']
 
-mongoose.connect('mongodb://127.0.0.1:27017/farmStand')
+mongoose.connect('mongodb://127.0.0.1:27017/farmStand2')
 .then(() => console.log('mongoose connection open'))
 .catch(() => console.log('mongoose connection error'))
 
 app.set('view engine','ejs')
 app.set('views',path.join(__dirname,'views'))
 
+// FARM ROUTES
+
+app.get('/farms',async(req,res) => {
+    const farms=await Farm.find({})
+    res.render('farms/index.ejs',{farms})
+})
+
+app.get('/farms/new',(req,res) => {
+    res.render('farms/new.ejs')
+})
+
+app.post('/farms',async (req,res) => {
+   const farm= new Farm(req.body)
+   await farm.save()
+   res.redirect('/farms')
+})
+
+
+//PRODUCTS ROUTES
 //view the products
 app.get('/products',async (req,res) => {
     // now in this get route we will list all our products by resonding and sending a webpage by quering the database
