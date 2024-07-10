@@ -21,15 +21,44 @@ app.set('views',path.join(__dirname,'views'))
 
 // FARM ROUTES
 
+// lost of all farms
 app.get('/farms',async(req,res) => {
     const farms=await Farm.find({})
     res.render('farms/index.ejs',{farms})
 })
 
+//template to load for a new farm
 app.get('/farms/new',(req,res) => {
     res.render('farms/new.ejs')
 })
 
+//show page for farms
+app.get('/farms/:id',async (req,res) => {
+    let {id}=req.params
+    let farm=await Farm.findById(id)
+    res.render('farms/show.ejs',{farm})
+})
+
+//template to make a new product in a farm
+app.get('/farms/:id/products/new',(req,res) => {
+    let {id}=req.params;
+    res.render('products/new',{categories,id})
+})
+
+//route for post request for products to be added to a farm
+app.post('/farms/:id/products',async (req,res) => {
+    let {id}=req.params
+    let farm=await Farm.findById(id)
+    let {name,price,category}=req.body
+    let product=new Product({name,price,category})
+    farm.products.push(product)         //here product was pushed because farm have an array of products
+    product.farm=farm
+    await farm.save()
+    await product.save()
+    res.send(farm)
+})
+
+// to make a new farm not a product
 app.post('/farms',async (req,res) => {
    const farm= new Farm(req.body)
    await farm.save()
