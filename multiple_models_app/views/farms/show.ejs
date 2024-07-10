@@ -11,7 +11,13 @@
         <li>city : $<%= farm.city %> </li>
         <li>Email : <%= farm.email %> </li>
     </ul>
+    <h2>Products</h2>
+    <ul>
+        <% for(product of farm.products) { %>
+            <li><a href="/products/<%=product._id%>"><%= product.name %></a></li>
+        <% } %>
+    </ul>
     <a href=" /farms">Back to Farms</a>
-    
+    <a href="/farms/<%=farm._id%>/products/new">Add a New Product</a>
 </body>
 </html>

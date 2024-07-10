@@ -35,14 +35,16 @@ app.get('/farms/new',(req,res) => {
 //show page for farms
 app.get('/farms/:id',async (req,res) => {
     let {id}=req.params
-    let farm=await Farm.findById(id)
+    let farm=await Farm.findById(id).populate('products')
+    console.log(farm)
     res.render('farms/show.ejs',{farm})
 })
 
 //template to make a new product in a farm
-app.get('/farms/:id/products/new',(req,res) => {
+app.get('/farms/:id/products/new',async (req,res) => {
     let {id}=req.params;
-    res.render('products/new',{categories,id})
+    const farm=await Farm.findById(id);
+    res.render('products/new',{categories,farm})
 })
 
 //route for post request for products to be added to a farm
@@ -55,7 +57,7 @@ app.post('/farms/:id/products',async (req,res) => {
     product.farm=farm
     await farm.save()
     await product.save()
-    res.send(farm)
+    res.redirect(`/farms/${id}`)
 })
 
 // to make a new farm not a product
@@ -67,6 +69,7 @@ app.post('/farms',async (req,res) => {
 
 
 //PRODUCTS ROUTES
+
 //view the products
 app.get('/products',async (req,res) => {
     // now in this get route we will list all our products by resonding and sending a webpage by quering the database
@@ -98,7 +101,8 @@ app.get('/products/new',(req,res) => {
 //view products in detail
 app.get('/products/:id', async (req,res) => {
     let {id}=req.params
-    let product=await Product.findById(id)  
+    let product=await Product.findById(id).populate('farm','name')
+    console.log(product)
     res.render('products/show.ejs',{product})
 })
 
