@@ -36,7 +36,6 @@ app.get('/farms/new',(req,res) => {
 app.get('/farms/:id',async (req,res) => {
     let {id}=req.params
     let farm=await Farm.findById(id).populate('products')
-    console.log(farm)
     res.render('farms/show.ejs',{farm})
 })
 
@@ -58,6 +57,13 @@ app.post('/farms/:id/products',async (req,res) => {
     await farm.save()
     await product.save()
     res.redirect(`/farms/${id}`)
+})
+
+app.delete('/farms/:id',async (req,res) => {
+    let {id}=req.params;
+    console.log('Deleting!!')
+    let result=await Farm.findByIdAndDelete(id)
+    res.redirect('/farms')
 })
 
 // to make a new farm not a product
