@@ -23,6 +23,13 @@ app.get('/getsignedcookie',(req,res) => {
     res.send('the cookie is signed')
 })
 
+app.get('/verifycookies',(req,res) => {
+    res.send(req.signedCookies)
+    console.log(req.cookies)
+    console.log(req.signedCookies)
+    // res.send(req.signedCookies)
+})
+
 app.listen(port,() => {
     console.log(`listening on port ${port}`)
 })
